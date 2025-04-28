@@ -59,7 +59,7 @@
     // Style function
     function style(feature) {
         return {
-            fillColor: getColor(Pop_Dens), // Adjust attribute name
+            fillColor: getColor(feature.properties.Pop_Dens), // Adjust attribute name
             weight: 1,
             opacity: 1,
             color: 'white',
@@ -69,14 +69,14 @@
     }
 
     // Load GeoJSON of your Communes
-    fetch('TrSon_Pop_Dens_web') // You need to upload your TrSon_Pop_Dens_web
+    fetch('TrSon_Pop_Dens_web.geojson') // You need to upload your TrSon_Pop_Dens_web
     .then(response => response.json())
     .then(data => {
         L.geoJson(data, {
             style: style,
             onEachFeature: function (feature, layer) {
                 // Tooltip (permanent name label)
-                layer.bindTooltip(VARNAME_3, { 
+                layer.bindTooltip(feature.properties.VARNAME_3, { 
                     permanent: true,
                     direction: "center",
                     className: "label"
